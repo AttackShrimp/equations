@@ -18,4 +18,20 @@ public enum Operation {
         }
         return res;
     }
+
+    public Operation revert() {
+        Operation res;
+        switch (this) {
+            case PLUS:
+                res = MINUS;
+                break;
+            case MINUS:
+                res = PLUS;
+                break;
+            default:
+                res = null;
+                break;
+        }
+        return res;
+    }
 }

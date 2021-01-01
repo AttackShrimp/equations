@@ -53,7 +53,29 @@ public class Operator extends Element {
     }
 
     @Override
+    void revert(Element direction) {
+        operation = operation.revert();
+        Element connection0 = connection[0];
+        connection[0] = connection[2];
+        Element nextRevert = connection[2];
+        connection[2] = direction;
+        if (!connection0.equals(direction)) connection[1] = connection0;
+        if (nextRevert == null) connection[0] = new Number(value);
+        else nextRevert.revert(this);
+        calculateValue();
+    }
+
+    @Override
     void calculateValue() {
         value = operation.operate(connection[0].getValue(), connection[1].getValue());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Operator)) return false;
+        Operator operator = (Operator) obj;
+        int i = 0;
+        while (i < 3 && operator.connection[i] != null && operator.connection[i].equals(connection[i])) i++;
+        return i == 3;
     }
 }

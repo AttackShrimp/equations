@@ -38,4 +38,6 @@ public abstract class Element {
     abstract void calculateValue();
 
     abstract void updateValueTree();
+
+    abstract void revert(Element direction);
 }
