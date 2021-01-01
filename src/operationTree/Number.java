@@ -15,4 +15,14 @@ public class Number extends Operator {
         this.value = value;
         updateValueTree();
     }
+
+    public Element pull() {
+        Element res = null;
+        if (connection[2] != null) {
+            connection[2].revert(null);
+            res = connection[2];
+            connection[2] = null;
+        }
+        return res;
+    }
 }

@@ -1,7 +1,21 @@
 package operationTree;
 
 public enum Operation {
-    PLUS, MINUS;
+    PLUS(true),
+    MINUS(PLUS, false);
+
+    public Operation revertOperation;
+    public final boolean commutativeProperty;
+
+    Operation(boolean commutativeProperty) {
+        this.commutativeProperty = commutativeProperty;
+    }
+
+    Operation(Operation revertOperation, boolean commutativeProperty) {
+        this.revertOperation = revertOperation;
+        this.revertOperation.revertOperation = this;
+        this.commutativeProperty = commutativeProperty;
+    }
 
     public double operate(double a, double b) {
         double res;
@@ -20,18 +34,10 @@ public enum Operation {
     }
 
     public Operation revert() {
-        Operation res;
-        switch (this) {
-            case PLUS:
-                res = MINUS;
-                break;
-            case MINUS:
-                res = PLUS;
-                break;
-            default:
-                res = null;
-                break;
-        }
-        return res;
+        return this.revertOperation;
+    }
+
+    public boolean commutative() {
+        return this.commutativeProperty;
     }
 }

@@ -54,14 +54,38 @@ public class Operator extends Element {
 
     @Override
     void revert(Element direction) {
-        operation = operation.revert();
+
         Element connection0 = connection[0];
-        connection[0] = connection[2];
-        Element nextRevert = connection[2];
+        Element connection1 = connection[1];
+        Element connection2 = connection[2];
+
         connection[2] = direction;
-        if (!connection0.equals(direction)) connection[1] = connection0;
-        if (nextRevert == null) connection[0] = new Number(value);
-        else nextRevert.revert(this);
+
+        boolean entrance0 = connection0.equals(direction);
+        connection0 = (entrance0) ? connection2 : connection0;
+        connection1 = (entrance0) ? connection1 : connection2;
+
+        if (!operation.commutative()) {
+            if (entrance0) operation = operation.revert();
+            connection[0] = connection0;
+            connection[1] = connection1;
+        } else {
+            operation = operation.revert();
+            if (connection0.getValue() > connection1.getValue()) {
+                connection[0] = connection0;
+                connection[1] = connection1;
+            } else {
+                connection[0] = connection1;
+                connection[1] = connection0;
+            }
+        }
+
+        if (connection2 == null) {
+            connection[1] = new Number(value);
+        } else {
+            connection2.revert(this);
+        }
+
         calculateValue();
     }
 
@@ -75,7 +99,7 @@ public class Operator extends Element {
         if (!(obj instanceof Operator)) return false;
         Operator operator = (Operator) obj;
         int i = 0;
-        while (i < 3 && operator.connection[i] != null && operator.connection[i].equals(connection[i])) i++;
-        return i == 3;
+        while (i < 3 && operator.connection[i] == connection[i]) i++;
+        return i == 3 && operator.value == value;
     }
 }

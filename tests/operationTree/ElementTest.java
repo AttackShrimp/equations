@@ -79,4 +79,12 @@ class ElementTest {
     void operator_minus_operator() {
         operator_operator(Operation.MINUS);
     }
+
+    /*@Test
+    void revert_simple_tree() {
+        Operator number = number(1);
+        Operator operation = number(7).minus(number(1).plus(number).minus(1));
+        number.setValue(7);
+        assertEquals(0, operation.getValue(), " 7 - ( 1 + 7 - 1) has to equal 0");
+    }*/
 }
