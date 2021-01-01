@@ -20,10 +20,6 @@ class NumberTest {
         oConstant = Arrays.stream(nConstant).map(ZERO::plus).toArray(Operator[]::new);
     }
 
-    static Number num(double d) {
-        return new Number(d);
-    }
-
     @Test
     void plus_with_double() {
         Arrays.stream(nConstant).forEach(n -> Arrays.stream(constant).forEach(c -> {

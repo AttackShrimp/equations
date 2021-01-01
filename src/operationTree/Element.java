@@ -27,9 +27,9 @@ public abstract class Element {
         return operate(operator, Operation.MINUS);
     }
 
-    abstract Operator operate(Number number, Operation operation);
-
-    abstract Operator operate(Operator operator, Operation operation);
+    abstract Operator operate(Element section, Operation operation);
 
     abstract double getValue();
+
+    abstract void updateConnection(int connectionNumber, Operator operator);
 }
