@@ -31,5 +31,11 @@ public abstract class Element {
 
     abstract double getValue();
 
+    abstract Operation getOperation();
+
     abstract void updateConnection(int connectionNumber, Operator operator);
+
+    abstract void calculateValue();
+
+    abstract void updateValueTree();
 }
