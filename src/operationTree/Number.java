@@ -10,4 +10,9 @@ public class Number extends Operator {
     public static Number number(double value) {
         return new Number(value);
     }
+
+    public void setValue(double value) {
+        this.value = value;
+        updateValueTree();
+    }
 }

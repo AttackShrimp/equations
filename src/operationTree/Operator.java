@@ -20,6 +20,7 @@ public class Operator extends Element {
     Operator operate(Element section, Operation operation) {
         Operator createdOp = new Operator(operation, this, section, this.connection[2]);
         if (connection[2] != null) connection[2].updateConnection(0, createdOp);
+        section.updateConnection(2, createdOp);
         this.updateConnection(2, createdOp);
         return createdOp;
     }
