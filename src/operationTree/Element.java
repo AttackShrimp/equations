@@ -1,10 +1,22 @@
+package operationTree;
+
 public abstract class Element {
+    public Operator plus(double numberValue) {
+        Number number = new Number(numberValue);
+        return operate(number, Operation.PLUS);
+    }
+
     public Operator plus(Number number) {
         return operate(number, Operation.PLUS);
     }
 
     public Operator plus(Operator operator) {
         return operate(operator, Operation.PLUS);
+    }
+
+    public Operator minus(double numberValue) {
+        Number number = new Number(numberValue);
+        return operate(number, Operation.MINUS);
     }
 
     public Operator minus(Number number) {
@@ -18,4 +30,6 @@ public abstract class Element {
     abstract Operator operate(Number number, Operation operation);
 
     abstract Operator operate(Operator operator, Operation operation);
+
+    abstract double getValue();
 }

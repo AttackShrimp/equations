@@ -1,3 +1,5 @@
+package operationTree;
+
 public enum Operation {
     PLUS, MINUS;
 

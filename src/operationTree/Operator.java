@@ -1,3 +1,5 @@
+package operationTree;
+
 public class Operator extends Element {
     Element[] connection;
     Operation operation;
@@ -27,6 +29,7 @@ public class Operator extends Element {
         return newOperator;
     }
 
+    @Override
     public double getValue() {
         return value;
     }

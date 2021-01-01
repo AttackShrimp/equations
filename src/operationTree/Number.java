@@ -1,4 +1,7 @@
+package operationTree;
+
 public class Number extends Element {
+    public static final Number ONE = new Number(1), ZERO = new Number(0);
     double value;
 
     public Number(double value) {
@@ -10,6 +13,7 @@ public class Number extends Element {
         this.value = value;
     }
 
+    @Override
     public double getValue() {
         return value;
     }
@@ -26,10 +30,6 @@ public class Number extends Element {
         double newValue = operation.operate(this.value, operator.getValue());
         Number newNumber = new Number(newValue);
         return new Operator(operation, this, operator, newNumber, newNumber.value);
-    }
-
-    public static double operateOn(Number number, double value, Operation operation) {
-        return operation.operate(number.value, value);
     }
 
     public static double operateOn(double value, Number number, Operation operation) {
