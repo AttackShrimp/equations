@@ -26,57 +26,57 @@ class ElementTest {
         });
     }
 
-    @Test
-    void number_plus_number() {
+    private void number_number(Operation operation) {
         Number[] numbers = makeNumbers();
         Arrays.stream(numbers).forEach(n -> {
             Number[] numbers2 = makeNumbers();
-            testOperationWithElement(n, numbers2, Operation.PLUS);
+            testOperationWithElement(n, numbers2, operation);
         });
+    }
+
+    private void number_operator(Operation operation) {
+        Number[] numbers = makeNumbers();
+        Arrays.stream(numbers).forEach(n -> {
+            Operator[] operators = makeOperators();
+            testOperationWithElement(n, operators, operation);
+        });
+    }
+
+    private void operator_operator(Operation operation) {
+        Operator[] operators = makeOperators();
+        Arrays.stream(operators).forEach(n -> {
+            Operator[] operators2 = makeOperators();
+            testOperationWithElement(n, operators2, operation);
+        });
+    }
+
+    @Test
+    void number_plus_number() {
+        number_number(Operation.PLUS);
     }
 
     @Test
     void number_plus_operator() {
-        Number[] numbers = makeNumbers();
-        Arrays.stream(numbers).forEach(n -> {
-            Operator[] operators = makeOperators();
-            testOperationWithElement(n, operators, Operation.PLUS);
-        });
+        number_operator(Operation.PLUS);
     }
 
     @Test
     void operator_plus_operator() {
-        Operator[] operators = makeOperators();
-        Arrays.stream(operators).forEach(n -> {
-            Operator[] operators2 = makeOperators();
-            testOperationWithElement(n, operators2, Operation.PLUS);
-        });
+        operator_operator(Operation.PLUS);
     }
 
     @Test
     void number_minus_number() {
-        Number[] numbers = makeNumbers();
-        Arrays.stream(numbers).forEach(n -> {
-            Number[] numbers2 = makeNumbers();
-            testOperationWithElement(n, numbers2, Operation.MINUS);
-        });
+        number_number(Operation.MINUS);
     }
 
     @Test
     void number_minus_operator() {
-        Number[] numbers = makeNumbers();
-        Arrays.stream(numbers).forEach(n -> {
-            Operator[] operators = makeOperators();
-            testOperationWithElement(n, operators, Operation.MINUS);
-        });
+        number_operator(Operation.MINUS);
     }
 
     @Test
     void operator_minus_operator() {
-        Operator[] operators = makeOperators();
-        Arrays.stream(operators).forEach(n -> {
-            Operator[] operators2 = makeOperators();
-            testOperationWithElement(n, operators2, Operation.MINUS);
-        });
+        operator_operator(Operation.MINUS);
     }
 }
