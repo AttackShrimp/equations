@@ -1,6 +1,5 @@
 package operationTree;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,22 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ElementTest {
 
     static final double[] constant = new double[]{0, 10, -10, 0.001};
-    static Number[] nConstant;
-    static Operator[] oConstant;
 
-    @BeforeEach
-    void setUp() {
-        makeNumberConstants();
-        makeOperatorConstants();
-        makeNumberConstants();
+    Number[] makeNumbers() {
+        return Arrays.stream(constant).mapToObj(Number::new).toArray(Number[]::new);
     }
 
-    void makeNumberConstants() {
-        nConstant = Arrays.stream(constant).mapToObj(Number::new).toArray(Number[]::new);
-    }
-
-    void makeOperatorConstants() {
-        oConstant = Arrays.stream(nConstant).map((number(0))::plus).toArray(Operator[]::new);
+    Operator[] makeOperators() {
+        return Arrays.stream(makeNumbers()).map((number(0))::plus).toArray(Operator[]::new);
     }
 
     private void testOperationWithElement(Element base, Element[] arr2, Operation op) {
@@ -38,49 +28,55 @@ class ElementTest {
 
     @Test
     void number_plus_number() {
-        Arrays.stream(nConstant).forEach(n -> {
-            makeNumberConstants();
-            testOperationWithElement(n, nConstant, Operation.PLUS);
+        Number[] numbers = makeNumbers();
+        Arrays.stream(numbers).forEach(n -> {
+            Number[] numbers2 = makeNumbers();
+            testOperationWithElement(n, numbers2, Operation.PLUS);
         });
     }
 
     @Test
     void number_plus_operator() {
-        Arrays.stream(nConstant).forEach(n -> {
-            makeOperatorConstants();
-            testOperationWithElement(n, oConstant, Operation.PLUS);
+        Number[] numbers = makeNumbers();
+        Arrays.stream(numbers).forEach(n -> {
+            Operator[] operators = makeOperators();
+            testOperationWithElement(n, operators, Operation.PLUS);
         });
     }
 
     @Test
     void operator_plus_operator() {
-        Arrays.stream(oConstant).forEach(n -> {
-            makeOperatorConstants();
-            testOperationWithElement(n, oConstant, Operation.PLUS);
+        Operator[] operators = makeOperators();
+        Arrays.stream(operators).forEach(n -> {
+            Operator[] operators2 = makeOperators();
+            testOperationWithElement(n, operators2, Operation.PLUS);
         });
     }
 
     @Test
     void number_minus_number() {
-        Arrays.stream(nConstant).forEach(n -> {
-            makeNumberConstants();
-            testOperationWithElement(n, nConstant, Operation.MINUS);
+        Number[] numbers = makeNumbers();
+        Arrays.stream(numbers).forEach(n -> {
+            Number[] numbers2 = makeNumbers();
+            testOperationWithElement(n, numbers2, Operation.MINUS);
         });
     }
 
     @Test
     void number_minus_operator() {
-        Arrays.stream(nConstant).forEach(n -> {
-            makeOperatorConstants();
-            testOperationWithElement(n, oConstant, Operation.MINUS);
+        Number[] numbers = makeNumbers();
+        Arrays.stream(numbers).forEach(n -> {
+            Operator[] operators = makeOperators();
+            testOperationWithElement(n, operators, Operation.MINUS);
         });
     }
 
     @Test
     void operator_minus_operator() {
-        Arrays.stream(oConstant).forEach(n -> {
-            makeOperatorConstants();
-            testOperationWithElement(n, oConstant, Operation.MINUS);
+        Operator[] operators = makeOperators();
+        Arrays.stream(operators).forEach(n -> {
+            Operator[] operators2 = makeOperators();
+            testOperationWithElement(n, operators2, Operation.MINUS);
         });
     }
 }
