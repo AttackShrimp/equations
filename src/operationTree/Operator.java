@@ -65,20 +65,15 @@ public class Operator extends Element {
         connection0 = (entrance0) ? connection2 : connection0;
         connection1 = (entrance0) ? connection1 : connection2;
 
-        if (!operation.commutative()) {
-            if (entrance0) operation = operation.revert();
+        if (operation.commutative() && connection0.getValue() < connection1.getValue()) {
+            connection[0] = connection1;
+            connection[1] = connection0;
+        } else {
             connection[0] = connection0;
             connection[1] = connection1;
-        } else {
-            operation = operation.revert();
-            if (connection0.getValue() > connection1.getValue()) {
-                connection[0] = connection0;
-                connection[1] = connection1;
-            } else {
-                connection[0] = connection1;
-                connection[1] = connection0;
-            }
         }
+
+        if (entrance0 || operation.commutative()) operation = operation.revert();
 
         if (connection2 == null) {
             connection[1] = new Number(value);
