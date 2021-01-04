@@ -54,7 +54,6 @@ public class Operator extends Element {
 
     @Override
     void revert(Element direction) {
-
         Element connection0 = connection[0];
         Element connection1 = connection[1];
         Element connection2 = connection[2];

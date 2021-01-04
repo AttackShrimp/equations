@@ -19,7 +19,7 @@ public class Number extends Operator {
     public Element pull() {
         Element res = null;
         if (connection[2] != null) {
-            connection[2].revert(null);
+            connection[2].revert(this);
             res = connection[2];
             connection[2] = null;
         }
