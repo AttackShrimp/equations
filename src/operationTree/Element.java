@@ -40,4 +40,6 @@ public abstract class Element {
     abstract void updateValueTree();
 
     abstract void revert(Element direction);
+
+    abstract void unlink(Element element);
 }

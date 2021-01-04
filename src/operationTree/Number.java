@@ -20,6 +20,7 @@ public class Number extends Operator {
         Element res = null;
         if (connection[2] != null) {
             connection[2].revert(this);
+            connection[2].unlink(this);
             res = connection[2];
             connection[2] = null;
         }

@@ -60,9 +60,14 @@ public class Operator extends Element {
 
         connection[2] = direction;
 
-        boolean entrance0 = connection0.equals(direction);
-        connection0 = (entrance0) ? connection2 : connection0;
-        connection1 = (entrance0) ? connection1 : connection2;
+        boolean isLastOperator = connection2 == null;
+        if (isLastOperator) {
+            connection2 = new Number(value);
+        }
+
+        boolean entranceAt0 = connection0.equals(direction);
+        connection0 = (entranceAt0) ? connection2 : connection0;
+        connection1 = (entranceAt0) ? connection1 : connection2;
 
         if (operation.commutative() && connection0.getValue() < connection1.getValue()) {
             connection[0] = connection1;
@@ -72,15 +77,20 @@ public class Operator extends Element {
             connection[1] = connection1;
         }
 
-        if (entrance0 || operation.commutative()) operation = operation.revert();
+        if (entranceAt0 || operation.commutative()) operation = operation.revert();
 
-        if (connection2 == null) {
-            connection[1] = new Number(value);
-        } else {
+        if (!isLastOperator) {
             connection2.revert(this);
         }
 
         calculateValue();
+    }
+
+    @Override
+    void unlink(Element element) {
+        for (int i = 0; i < 3; i++) {
+            if (connection[i].equals(element)) connection[i] = null;
+        }
     }
 
     @Override
