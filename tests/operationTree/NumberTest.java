@@ -32,10 +32,10 @@ class NumberTest {
     }
 
     @Test
-    void pull_leaves_null_in_last_operator() {
+    void reuse_operator_after_number_pull() {
         Number number = number(1);
         number(2).plus(number);
         Operator newBase = (Operator) number.pull();
-        assertEquals(3, newBase.plus(1).getValue(), "when changing pull node, the last operator has to update its value");
+        assertEquals(2, newBase.plus(1).getValue(), "when changing pull node, the last operator has to update its value");
     }
 }
