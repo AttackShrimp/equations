@@ -46,7 +46,7 @@ public class Operator extends Element {
 
     @Override
     void updateValueTree() {
-        if (this.connection[2] != null) {
+        if (this.connection[2] != null/*set equal to pull*/) {
             this.connection[2].calculateValue();
             this.connection[2].updateValueTree();
         }

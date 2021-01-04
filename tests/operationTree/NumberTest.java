@@ -16,10 +16,26 @@ class NumberTest {
     }
 
     @Test
-    void pull_from_number() {
+    void pull_from_left_number() {
         Number number = number(10);
         number(7).minus(number(1).plus(number).minus(1));
         Operator newBase = (Operator) number.pull();
         assertEquals(number.getValue(), newBase.getValue(), "in 7 - ( 1 + x - 1) = -3, x has to equal 10");
+    }
+
+    @Test
+    void pull_from_right_number() {
+        Number number = number(1);
+        number(23).plus(7).minus(number.plus(2));
+        Operator newBase = (Operator) number.pull();
+        assertEquals(number.getValue(), newBase.getValue(), "in 23 + 7 - (x + 2) = 27, x has to equal 1");
+    }
+
+    @Test
+    void pull_leaves_null_in_last_operator() {
+        Number number = number(1);
+        number(2).plus(number);
+        Operator newBase = (Operator) number.pull();
+        assertEquals(3, newBase.plus(1).getValue(), "when changing pull node, the last operator has to update its value");
     }
 }
