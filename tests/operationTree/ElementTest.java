@@ -15,8 +15,8 @@ class ElementTest {
         return Arrays.stream(constant).mapToObj(Number::new).toArray(Number[]::new);
     }
 
-    Operator[] makeOperators() {
-        return Arrays.stream(makeNumbers()).map((number(0))::plus).toArray(Operator[]::new);
+    BinaryOperator[] makeOperators() {
+        return Arrays.stream(makeNumbers()).map((number(0))::plus).toArray(BinaryOperator[]::new);
     }
 
     private void testOperationWithElement(Element base, Element[] arr2, Operation op) {
@@ -37,15 +37,15 @@ class ElementTest {
     private void number_operator(Operation operation) {
         Number[] numbers = makeNumbers();
         Arrays.stream(numbers).forEach(n -> {
-            Operator[] operators = makeOperators();
-            testOperationWithElement(n, operators, operation);
+            BinaryOperator[] binaryOperators = makeOperators();
+            testOperationWithElement(n, binaryOperators, operation);
         });
     }
 
     private void operator_operator(Operation operation) {
-        Operator[] operators = makeOperators();
-        Arrays.stream(operators).forEach(n -> {
-            Operator[] operators2 = makeOperators();
+        BinaryOperator[] binaryOperators = makeOperators();
+        Arrays.stream(binaryOperators).forEach(n -> {
+            BinaryOperator[] operators2 = makeOperators();
             testOperationWithElement(n, operators2, operation);
         });
     }
@@ -82,8 +82,8 @@ class ElementTest {
 
     /*@Test
     void revert_simple_tree() {
-        Operator number = number(1);
-        Operator operation = number(7).minus(number(1).plus(number).minus(1));
+        BinaryOperator number = number(1);
+        BinaryOperator operation = number(7).minus(number(1).plus(number).minus(1));
         number.setValue(7);
         assertEquals(0, operation.getValue(), " 7 - ( 1 + 7 - 1) has to equal 0");
     }*/

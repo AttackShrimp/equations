@@ -1,6 +1,6 @@
 package operationTree;
 
-public class Number extends Operator {
+public class Number extends BinaryOperator {
     public static final Number ONE = new Number(1), ZERO = new Number(0);
 
     public Number(double value) {

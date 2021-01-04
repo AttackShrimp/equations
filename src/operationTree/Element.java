@@ -1,39 +1,39 @@
 package operationTree;
 
 public abstract class Element {
-    public Operator plus(double numberValue) {
+    public BinaryOperator plus(double numberValue) {
         Number number = new Number(numberValue);
         return operate(number, Operation.PLUS);
     }
 
-    public Operator plus(Number number) {
+    public BinaryOperator plus(Number number) {
         return operate(number, Operation.PLUS);
     }
 
-    public Operator plus(Operator operator) {
-        return operate(operator, Operation.PLUS);
+    public BinaryOperator plus(BinaryOperator binaryOperator) {
+        return operate(binaryOperator, Operation.PLUS);
     }
 
-    public Operator minus(double numberValue) {
+    public BinaryOperator minus(double numberValue) {
         Number number = new Number(numberValue);
         return operate(number, Operation.MINUS);
     }
 
-    public Operator minus(Number number) {
+    public BinaryOperator minus(Number number) {
         return operate(number, Operation.MINUS);
     }
 
-    public Operator minus(Operator operator) {
-        return operate(operator, Operation.MINUS);
+    public BinaryOperator minus(BinaryOperator binaryOperator) {
+        return operate(binaryOperator, Operation.MINUS);
     }
 
-    abstract Operator operate(Element section, Operation operation);
+    abstract BinaryOperator operate(Element section, Operation operation);
 
     abstract double getValue();
 
     abstract Operation getOperation();
 
-    abstract void updateConnection(int connectionNumber, Operator operator);
+    abstract void updateConnection(int connectionNumber, BinaryOperator binaryOperator);
 
     abstract void calculateValue();
 

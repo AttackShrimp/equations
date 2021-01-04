@@ -1,24 +1,24 @@
 package operationTree;
 
-public class Operator extends Element {
+public class BinaryOperator extends Element {
     Element[] connection;
     Operation operation;
     double value;
 
-    public Operator(Operation operation, Element c1, Element c2, Element c3) {
+    public BinaryOperator(Operation operation, Element c1, Element c2, Element c3) {
         this.connection = new Element[]{c1, c2, c3};
         this.operation = operation;
         calculateValue();
     }
 
-    protected Operator() {
+    protected BinaryOperator() {
         this.connection = new Element[]{null, null, null};
         this.operation = null;
     }
 
     @Override
-    Operator operate(Element section, Operation operation) {
-        Operator createdOp = new Operator(operation, this, section, this.connection[2]);
+    BinaryOperator operate(Element section, Operation operation) {
+        BinaryOperator createdOp = new BinaryOperator(operation, this, section, this.connection[2]);
         if (connection[2] != null) connection[2].updateConnection(0, createdOp);
         section.updateConnection(2, createdOp);
         this.updateConnection(2, createdOp);
@@ -26,8 +26,8 @@ public class Operator extends Element {
     }
 
     @Override
-    void updateConnection(int connectionNumber, Operator operator) {
-        connection[connectionNumber] = operator;
+    void updateConnection(int connectionNumber, BinaryOperator binaryOperator) {
+        connection[connectionNumber] = binaryOperator;
         if (connectionNumber != 2) {
             calculateValue();
             updateValueTree();
@@ -46,7 +46,7 @@ public class Operator extends Element {
 
     @Override
     void updateValueTree() {
-        if (this.connection[2] != null/*set equal to pull*/) {
+        if (this.connection[2] != null) {
             this.connection[2].calculateValue();
             this.connection[2].updateValueTree();
         }
@@ -100,10 +100,10 @@ public class Operator extends Element {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Operator)) return false;
-        Operator operator = (Operator) obj;
+        if (!(obj instanceof BinaryOperator)) return false;
+        BinaryOperator binaryOperator = (BinaryOperator) obj;
         int i = 0;
-        while (i < 3 && operator.connection[i] == connection[i]) i++;
-        return i == 3 && operator.value == value;
+        while (i < 3 && binaryOperator.connection[i] == connection[i]) i++;
+        return i == 3 && binaryOperator.value == value;
     }
 }
