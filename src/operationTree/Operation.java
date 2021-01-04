@@ -33,6 +33,10 @@ public enum Operation {
         return res;
     }
 
+    public double operate(double[] a) { // should end up being only this method
+        return operate(a[0], a[1]);
+    }
+
     public Operation revert() {
         return this.revertOperation;
     }
