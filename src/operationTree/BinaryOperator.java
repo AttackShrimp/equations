@@ -3,7 +3,7 @@ package operationTree;
 import java.util.Arrays;
 
 public class BinaryOperator extends Element {
-    Element[] inputs;
+    Element[] inputs;//REF: turn to list
     Element output;
     Operation operation;
     double value;
@@ -19,7 +19,7 @@ public class BinaryOperator extends Element {
         this(operation, c3, new Element[]{c1, c2});
     }
 
-    protected BinaryOperator() {
+    protected BinaryOperator() {//REF: extend Number from new Operator class
         this.inputs = new Element[]{null, null};
         this.output = null;
         this.operation = null;
@@ -69,7 +69,7 @@ public class BinaryOperator extends Element {
     }
 
     @Override
-    void revert(Element direction) {
+    void revert(Element direction) {//REF: calculate options before refactoring
         Element connection0 = inputs[0];
         Element connection1 = inputs[1];
         Element connection2 = output;
@@ -111,7 +111,7 @@ public class BinaryOperator extends Element {
     }
 
     @Override
-    void calculateValue() {
+    void calculateValue() {//REF: allow for list in operation.operate
         value = operation.operate(inputs[0].getValue(), inputs[1].getValue());
     }
 
