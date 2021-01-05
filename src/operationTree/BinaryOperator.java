@@ -1,5 +1,7 @@
 package operationTree;
 
+import java.util.Arrays;
+
 public class BinaryOperator extends Element {
     Element[] inputs;
     Element output;
@@ -24,10 +26,14 @@ public class BinaryOperator extends Element {
     }
 
     @Override
-    BinaryOperator operate(Element section, Operation operation) {
-        BinaryOperator createdOp = new BinaryOperator(operation, this, section, this.output);
+    BinaryOperator operate(Element[] sections, Operation operation) {
+        Element[] createdOpInputs = new Element[sections.length + 1];
+        createdOpInputs[0] = this;
+        System.arraycopy(sections, 0, createdOpInputs, 1, sections.length);
+
+        BinaryOperator createdOp = new BinaryOperator(operation, this.output, createdOpInputs);
         if (output != null) output.updateInput(0, createdOp);
-        section.updateOutput(createdOp);
+        Arrays.asList(sections).forEach(s -> s.updateOutput(createdOp));
         this.updateOutput(createdOp);
         return createdOp;
     }

@@ -22,7 +22,7 @@ class ElementTest {
     private void testOperationWithElement(Element base, Element[] arr2, Operation op) {
         Arrays.stream(arr2).forEach(c -> {
             String msg = base.getValue() + " + " + c + " must be " + (op.operate(base.getValue(), c.getValue()));
-            assertEquals((op.operate(base.getValue(), c.getValue())), base.operate(c, op).getValue(), msg);
+            assertEquals((op.operate(base.getValue(), c.getValue())), base.operate(new Element[]{c}, op).getValue(), msg);
         });
     }
 

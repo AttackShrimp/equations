@@ -3,31 +3,31 @@ package operationTree;
 public abstract class Element {
     public BinaryOperator plus(double numberValue) {
         Number number = new Number(numberValue);
-        return operate(number, Operation.PLUS);
+        return operate(new Element[]{number}, Operation.PLUS);
     }
 
     public BinaryOperator plus(Number number) {
-        return operate(number, Operation.PLUS);
+        return operate(new Element[]{number}, Operation.PLUS);
     }
 
     public BinaryOperator plus(BinaryOperator binaryOperator) {
-        return operate(binaryOperator, Operation.PLUS);
+        return operate(new Element[]{binaryOperator}, Operation.PLUS);
     }
 
     public BinaryOperator minus(double numberValue) {
         Number number = new Number(numberValue);
-        return operate(number, Operation.MINUS);
+        return operate(new Element[]{number}, Operation.MINUS);
     }
 
     public BinaryOperator minus(Number number) {
-        return operate(number, Operation.MINUS);
+        return operate(new Element[]{number}, Operation.MINUS);
     }
 
     public BinaryOperator minus(BinaryOperator binaryOperator) {
-        return operate(binaryOperator, Operation.MINUS);
+        return operate(new Element[]{binaryOperator}, Operation.MINUS);
     }
 
-    abstract BinaryOperator operate(Element section, Operation operation);
+    abstract BinaryOperator operate(Element[] sections, Operation operation);
 
     abstract double getValue();
 
