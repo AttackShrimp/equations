@@ -18,11 +18,11 @@ public class Number extends BinaryOperator {
 
     public Element pull() {
         Element res = null;
-        if (connection[2] != null) {
-            connection[2].revert(this);
-            connection[2].unlink(this);
-            res = connection[2];
-            connection[2] = null;
+        if (output != null) {
+            output.revert(this);
+            output.unlink(this);
+            res = output;
+            output = null;
         }
         return res;
     }
