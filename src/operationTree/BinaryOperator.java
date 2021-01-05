@@ -1,20 +1,24 @@
 package operationTree;
 
 public class BinaryOperator extends Element {
-    Element[] input;
+    Element[] inputs;
     Element output;
     Operation operation;
     double value;
 
-    public BinaryOperator(Operation operation, Element c1, Element c2, Element c3) {
-        this.input = new Element[]{c1, c2};
-        this.output = c3;
+    public BinaryOperator(Operation operation, Element output, Element[] inputs) {
+        this.inputs = inputs;
+        this.output = output;
         this.operation = operation;
         calculateValue();
     }
 
+    public BinaryOperator(Operation operation, Element c1, Element c2, Element c3) {
+        this(operation, c3, new Element[]{c1, c2});
+    }
+
     protected BinaryOperator() {
-        this.input = new Element[]{null, null};
+        this.inputs = new Element[]{null, null};
         this.output = null;
         this.operation = null;
     }
@@ -31,7 +35,7 @@ public class BinaryOperator extends Element {
     @Override
     void updateConnection(int connectionNumber, BinaryOperator binaryOperator) {
         if (connectionNumber != 2) {//Change
-            input[connectionNumber] = binaryOperator;
+            inputs[connectionNumber] = binaryOperator;
             calculateValue();
             updateValueTree();
         } else {
@@ -59,8 +63,8 @@ public class BinaryOperator extends Element {
 
     @Override
     void revert(Element direction) {
-        Element connection0 = input[0];
-        Element connection1 = input[1];
+        Element connection0 = inputs[0];
+        Element connection1 = inputs[1];
         Element connection2 = output;
 
         output = direction;
@@ -75,11 +79,11 @@ public class BinaryOperator extends Element {
         connection1 = (entranceAt0) ? connection1 : connection2;
 
         if (operation.commutative() && connection0.getValue() < connection1.getValue()) {
-            input[0] = connection1;
-            input[1] = connection0;
+            inputs[0] = connection1;
+            inputs[1] = connection0;
         } else {
-            input[0] = connection0;
-            input[1] = connection1;
+            inputs[0] = connection0;
+            inputs[1] = connection1;
         }
 
         if (entranceAt0 || operation.commutative()) operation = operation.revert();
@@ -93,15 +97,15 @@ public class BinaryOperator extends Element {
 
     @Override
     void unlink(Element element) {
-        for (int i = 0; i < input.length; i++) {
-            if (input[i].equals(element)) input[i] = null;
+        for (int i = 0; i < inputs.length; i++) {
+            if (inputs[i].equals(element)) inputs[i] = null;
         }
         if (output.equals(element)) output = null;
     }
 
     @Override
     void calculateValue() {
-        value = operation.operate(input[0].getValue(), input[1].getValue());
+        value = operation.operate(inputs[0].getValue(), inputs[1].getValue());
     }
 
     @Override
@@ -109,7 +113,7 @@ public class BinaryOperator extends Element {
         if (!(obj instanceof BinaryOperator)) return false;
         BinaryOperator binaryOperator = (BinaryOperator) obj;
         int i = 0;
-        while (i < input.length && binaryOperator.input[i] == input[i]) i++;
-        return i == input.length && output == binaryOperator.output && binaryOperator.value == value;
+        while (i < inputs.length && binaryOperator.inputs[i] == inputs[i]) i++;
+        return i == inputs.length && output == binaryOperator.output && binaryOperator.value == value;
     }
 }
