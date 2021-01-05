@@ -1,10 +1,8 @@
 package operationTree;
 
-import java.util.Arrays;
+public class Operator /*extends Element */ {
 
-public class Operator extends Element {
-
-    Element[] input;
+    /*Element[] input;
     Element output;
     Operation operation;
     double value;
@@ -16,8 +14,8 @@ public class Operator extends Element {
         calculateValue();
     }
 
-    //@Override
-    Operator operate(Element section, Operation operation) {
+    @Override
+    Operator operate(Element[] section, Operation operation) {//REDO
         Operator createdOp = new Operator(operation, this, section, this.output);
         if (output != null) output.updateConnection(0, createdOp);
         section.updateConnection(2, createdOp);
@@ -25,8 +23,8 @@ public class Operator extends Element {
         return createdOp;
     }
 
-    //@Override
-    void updateConnection(int connectionNumber, Operator operator) {
+    @Override
+    void updateConnection(int connectionNumber, Operator operator) {//REDO + REFERENCES
         if (connectionNumber != -1) {
             input[connectionNumber] = operator;
             calculateValue();
@@ -55,7 +53,7 @@ public class Operator extends Element {
     }
 
     @Override
-    void revert(Element direction) {
+    void revert(Element direction) {//REDO
         Element connection0 = input[0];
         Element connection1 = input[1];
         Element connection2 = output;
@@ -108,5 +106,5 @@ public class Operator extends Element {
         int i = 0;
         while (i < input.length && operator.input[i] == input[i]) i++;
         return i == input.length && output == operator.output && operator.value == value;
-    }
+    }*/
 }
