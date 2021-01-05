@@ -26,21 +26,22 @@ public class BinaryOperator extends Element {
     @Override
     BinaryOperator operate(Element section, Operation operation) {
         BinaryOperator createdOp = new BinaryOperator(operation, this, section, this.output);
-        if (output != null) output.updateConnection(0, createdOp);
-        section.updateConnection(2, createdOp);
-        this.updateConnection(2, createdOp);
+        if (output != null) output.updateInput(0, createdOp);
+        section.updateOutput(createdOp);
+        this.updateOutput(createdOp);
         return createdOp;
     }
 
     @Override
-    void updateConnection(int connectionNumber, BinaryOperator binaryOperator) {
-        if (connectionNumber != 2) {//Change
-            inputs[connectionNumber] = binaryOperator;
-            calculateValue();
-            updateValueTree();
-        } else {
-            output = binaryOperator;
-        }
+    void updateInput(int connectionNumber, BinaryOperator binaryOperator) {
+        inputs[connectionNumber] = binaryOperator;
+        calculateValue();
+        updateValueTree();
+    }
+
+    @Override
+    void updateOutput(BinaryOperator binaryOperator) {
+        output = binaryOperator;
     }
 
     @Override

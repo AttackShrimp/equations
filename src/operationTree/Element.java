@@ -33,7 +33,9 @@ public abstract class Element {
 
     abstract Operation getOperation();
 
-    abstract void updateConnection(int connectionNumber, BinaryOperator binaryOperator);
+    abstract void updateInput(int connectionNumber, BinaryOperator binaryOperator);
+
+    abstract void updateOutput(BinaryOperator binaryOperator);
 
     abstract void calculateValue();
 
