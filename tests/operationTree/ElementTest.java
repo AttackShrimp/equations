@@ -3,6 +3,7 @@ package operationTree;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static operationTree.Number.number;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +23,7 @@ class ElementTest {
     private void testOperationWithElement(Element base, Element[] arr2, Operation op) {
         Arrays.stream(arr2).forEach(c -> {
             String msg = base.getValue() + " + " + c + " must be " + (op.operate(base.getValue(), c.getValue()));
-            assertEquals((op.operate(base.getValue(), c.getValue())), base.operate(new Element[]{c}, op).getValue(), msg);
+            assertEquals((op.operate(base.getValue(), c.getValue())), base.operate(List.of(c), op).getValue(), msg);
         });
     }
 

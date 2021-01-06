@@ -1,33 +1,35 @@
 package operationTree;
 
+import java.util.List;
+
 public abstract class Element {
     public BinaryOperator plus(double numberValue) {
         Number number = new Number(numberValue);
-        return operate(new Element[]{number}, Operation.PLUS);
+        return operate(List.of(number), Operation.PLUS);
     }
 
     public BinaryOperator plus(Number number) {
-        return operate(new Element[]{number}, Operation.PLUS);
+        return operate(List.of(number), Operation.PLUS);
     }
 
     public BinaryOperator plus(BinaryOperator binaryOperator) {
-        return operate(new Element[]{binaryOperator}, Operation.PLUS);
+        return operate(List.of(binaryOperator), Operation.PLUS);
     }
 
     public BinaryOperator minus(double numberValue) {
         Number number = new Number(numberValue);
-        return operate(new Element[]{number}, Operation.MINUS);
+        return operate(List.of(number), Operation.MINUS);
     }
 
     public BinaryOperator minus(Number number) {
-        return operate(new Element[]{number}, Operation.MINUS);
+        return operate(List.of(number), Operation.MINUS);
     }
 
     public BinaryOperator minus(BinaryOperator binaryOperator) {
-        return operate(new Element[]{binaryOperator}, Operation.MINUS);
+        return operate(List.of(binaryOperator), Operation.MINUS);
     }
 
-    abstract BinaryOperator operate(Element[] sections, Operation operation);
+    abstract BinaryOperator operate(List<Element> sections, Operation operation);
 
     abstract double getValue();
 
