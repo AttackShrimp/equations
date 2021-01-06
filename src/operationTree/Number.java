@@ -1,6 +1,6 @@
 package operationTree;
 
-public class Number extends BinaryOperator {
+public class Number extends BinaryOperator {//REF: allow for multiple inputs
     public static final Number ONE = new Number(1), ZERO = new Number(0);
 
     public Number(double value) {
@@ -16,7 +16,7 @@ public class Number extends BinaryOperator {
         updateValueTree();
     }
 
-    public Element pull() {
+    public Element pull() {//At the moment number can only pull from one direction, this will be its last linked operator
         Element res = null;
         if (output != null) {
             output.revert(this);
@@ -26,4 +26,6 @@ public class Number extends BinaryOperator {
         }
         return res;
     }
+
+    //implement operator methods
 }

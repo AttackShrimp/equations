@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BinaryOperator extends Element {
+public class BinaryOperator extends Element {//REF: redo class structure
     List<Element> inputs;
     Element output;
     Operation operation;
