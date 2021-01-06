@@ -112,8 +112,8 @@ public class BinaryOperator extends Element {
     }
 
     @Override
-    void calculateValue() {//REF: allow for list in operation.operate
-        value = operation.operate(inputs.get(0).getValue(), inputs.get(1).getValue());
+    void calculateValue() {
+        value = operation.operate(inputs.stream().mapToDouble(Element::getValue).toArray());
     }
 
     @Override

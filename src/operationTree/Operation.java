@@ -33,8 +33,12 @@ public enum Operation {
         return res;
     }
 
-    public double operate(double[] a) { // should end up being only this method
-        return operate(a[0], a[1]);
+    public double operate(double[] a) {
+        double res = a[0];
+        for (int i = 1; i < a.length; i++) {
+            res = operate(res, a[i]);
+        }
+        return res;
     }
 
     public Operation revert() {
