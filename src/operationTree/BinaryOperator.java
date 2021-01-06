@@ -20,7 +20,7 @@ public class BinaryOperator extends Element {
     }
 
     protected BinaryOperator() {//REF: extend Number from new Operator class
-        this.inputs = new Element[]{null, null};
+        this.inputs = new Element[0];
         this.output = null;
         this.operation = null;
     }
@@ -120,7 +120,7 @@ public class BinaryOperator extends Element {
         if (!(obj instanceof BinaryOperator)) return false;
         BinaryOperator binaryOperator = (BinaryOperator) obj;
         int i = 0;
-        while (i < inputs.length && binaryOperator.inputs[i] == inputs[i]) i++;
+        while (i < inputs.length && i < binaryOperator.inputs.length && binaryOperator.inputs[i] == inputs[i]) i++;
         return i == inputs.length && output == binaryOperator.output && binaryOperator.value == value;
     }
 }
