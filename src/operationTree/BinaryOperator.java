@@ -1,6 +1,7 @@
 package operationTree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class BinaryOperator extends Element {
@@ -126,8 +127,12 @@ public class BinaryOperator extends Element {
     }
 
     private boolean sameInputs(List<Element> a, List<Element> b) {
-        int i = 0;
-        while (i < a.size() && i < b.size() && a.get(i) == b.get(i)) i++;
-        return i == a.size() && i == b.size();
+        Iterator<Element> aIterator = a.iterator();
+        Iterator<Element> bIterator = b.iterator();
+        boolean res = a.size() == b.size();
+        while (res && aIterator.hasNext()) {
+            if (aIterator.next() != bIterator.next()) res = false;
+        }
+        return res;
     }
 }
