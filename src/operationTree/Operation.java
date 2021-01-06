@@ -33,7 +33,7 @@ public enum Operation {
         return res;
     }
 
-    public double operate(double[] a) {
+    public double operate(double[] a) {// REF: use reduce
         double res = a[0];
         for (int i = 1; i < a.length; i++) {
             res = operate(res, a[i]);

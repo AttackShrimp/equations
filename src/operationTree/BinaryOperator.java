@@ -3,6 +3,7 @@ package operationTree;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BinaryOperator extends Element {
     List<Element> inputs;
@@ -104,10 +105,8 @@ public class BinaryOperator extends Element {
     }
 
     @Override
-    void unlink(Element element) {//REF: allow for resizing instead of setting to null
-        for (int i = 0; i < inputs.size(); i++) {
-            if (inputs.get(i).equals(element)) inputs.set(i, null);
-        }
+    void unlink(Element element) {
+        inputs = inputs.stream().filter(e -> !e.equals(element)).collect(Collectors.toList());
         if (output.equals(element)) output = null;
     }
 
