@@ -71,36 +71,26 @@ public class BinaryOperator extends Element {
     }
 
     @Override
-    void revert(Element direction) {//REF: calculate options before refactoring
-        Element connection0 = inputs.get(0);
-        Element connection1 = inputs.get(1);
-        Element connection2 = output;
+    void revert(Element direction) {
+        int directionIndex = inputs.indexOf(direction);
+        inputs.remove(direction);
 
-        output = direction;
-
-        boolean isLastOperator = connection2 == null;
+        boolean isLastOperator = output == null;
         if (isLastOperator) {
-            connection2 = new Number(value);
+            output = new Number(value);
         }
 
-        boolean entranceAt0 = connection0.equals(direction);
-        connection0 = (entranceAt0) ? connection2 : connection0;
-        connection1 = (entranceAt0) ? connection1 : connection2;
-
-        if (operation.commutative() && connection0.getValue() < connection1.getValue()) {
-            inputs.set(0, connection1);
-            inputs.set(1, connection0);
+        if (operation.commutative() || directionIndex == 0) {
+            operation = operation.revert();
+            inputs.add(0, output);
         } else {
-            inputs.set(0, connection0);
-            inputs.set(1, connection1);
+            inputs.add(output);
         }
-
-        if (entranceAt0 || operation.commutative()) operation = operation.revert();
 
         if (!isLastOperator) {
-            connection2.revert(this);
+            output.revert(this);
+            output = direction;
         }
-
         calculateValue();
     }
 
