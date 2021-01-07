@@ -1,5 +1,7 @@
 package operationTree;
 
+import java.util.Arrays;
+
 public enum Operation {
     PLUS(true),
     MINUS(PLUS, false);
@@ -33,12 +35,8 @@ public enum Operation {
         return res;
     }
 
-    public double operate(double[] a) {// REF: use reduce
-        double res = a[0];
-        for (int i = 1; i < a.length; i++) {
-            res = operate(res, a[i]);
-        }
-        return res;
+    public double operate(double[] a) {
+        return Arrays.stream(a).reduce(this::operate).orElse(a[0]);
     }
 
     public Operation revert() {
