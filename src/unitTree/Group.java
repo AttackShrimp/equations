@@ -8,8 +8,9 @@ public class Group extends Operable {
     Polynomial polynomial;
 
     public void parseEquation(String equation) {
+        StringBuilder stringBuilder = new StringBuilder(equation);
         Link currLink = new Link();
-        OperablePair currPair = currLink.parsePair(equation);
+        OperablePair currPair = currLink.parsePair(stringBuilder);
         while (currPair != null) {
             operables.addAll(currPair.getPair());
             links.add(currLink);
