@@ -1,11 +1,11 @@
 package unitTree;
 
-import java.util.Collection;
+import java.util.List;
 
 public class OperablePair {
-    Operable[] pair;
+    List<Operable> pair;
 
-    public Collection<? extends Operable> getPair() {
-        return null;
+    public List<Operable> getPair() {
+        return pair;
     }
 }
