@@ -5,7 +5,7 @@ import java.util.List;
 public class Group extends Operable {
     List<Operable> operables;
     List<Link> links;
-    Polinomial polinomial;
+    Polynomial polynomial;
 
     public void parseEquation(String equation) {
         Link currLink = new Link();
@@ -18,10 +18,10 @@ public class Group extends Operable {
         }
     }
 
-    public void generatePolinomial() {
+    public void generatePolynomial() {
         operables.stream().filter(op -> op instanceof Group).forEach((Group g) -> {
-            g.generatePolinomial();
-            polinomial.add(g.polinomial);
+            g.generatePolynomial();
+            polynomial.add(g.polynomial);
         });
     }
 }

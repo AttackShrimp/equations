@@ -2,6 +2,6 @@ package unitTree;
 
 import java.util.List;
 
-public class Polinomial {
+public class Polynomial {
     List<List<Unit>> units;
 }
