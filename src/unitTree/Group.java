@@ -15,14 +15,15 @@ public class Group extends Operable {
             operables.addAll(currPair.getPair());
             links.add(currLink);
             currLink = new Link();
-            currPair = currLink.parsePair(equation);
+            currPair = currLink.parsePair(stringBuilder);
         }
     }
 
     public void generatePolynomial() {
-        operables.stream().filter(op -> op instanceof Group).forEach((Group g) -> {
-            g.generatePolynomial();
-            polynomial.add(g.polynomial);
+        operables.stream().filter(op -> op instanceof Group).forEach(g -> {
+            Group group = (Group) g;
+            group.generatePolynomial();
+            polynomial.add(group.polynomial);
         });
     }
 }
