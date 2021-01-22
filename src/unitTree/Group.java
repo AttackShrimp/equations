@@ -7,6 +7,10 @@ public class Group extends Operable {
     List<Link> links;
     Polynomial polynomial;
 
+    public Group(String equation) {
+        parseEquation(equation);
+    }
+
     public void parseEquation(String equation) {
         StringBuilder stringBuilder = new StringBuilder(equation);
         Link currLink = new Link();
