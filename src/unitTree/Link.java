@@ -10,19 +10,35 @@ public class Link {
     OperablePair operablePair;
     Operation operation;
 
+    public Link(Operable fistOfPair) {
+        operablePair = new OperablePair(fistOfPair);
+    }
+
+    public Link() {
+    }
+
     public OperablePair parsePair(StringBuilder equation) {
-
-        char nextChar = equation.charAt(0);
-        Operable first;
-        if (nextChar == '(') {
-            first = new Group(equation.substring(0, equation.indexOf(")")));
-        } else if (nextChar >= 'A' && nextChar <= 'z') {
-            first = new Unit(getUnknown(equation));
-        } else {
-            first = new Unit(matchDouble(equation));
-        }
-
         return null;
+    }
+
+    public OperablePair parseNext(StringBuilder equation) {
+        operation = Operation.parse(equation.charAt(0));
+        equation.delete(0, 1);
+        operablePair.setSecond(nextOperable(equation));
+        return operablePair;
+    }
+
+    private Operable nextOperable(StringBuilder equation) {
+        char nextChar = equation.charAt(0);
+        Operable next;
+        if (nextChar == '(') {
+            next = new Group(equation.substring(0, equation.indexOf(")")));
+        } else if (nextChar >= 'A' && nextChar <= 'z') {
+            next = new Unit(getUnknown(equation));
+        } else {
+            next = new Unit(matchDouble(equation));
+        }
+        return next;
     }
 
     private char getUnknown(StringBuilder equation) {
