@@ -3,16 +3,21 @@ package unitTree;
 public class Unit extends Operable {
     int polynomialDegree;
     double constant;
-    String id;
+    char id;
 
     public Unit(double constant) {
         polynomialDegree = 0;
         this.constant = constant;
     }
 
-    public Unit(double constant, String id) {
+    public Unit(double constant, char id) {
         this.constant = constant;
         this.id = id;
+        polynomialDegree = 1;
+    }
+
+    public Unit(char id) {
+        this(1, id);
     }
 
     @Override
@@ -21,7 +26,7 @@ public class Unit extends Operable {
             Unit cmp = (Unit) obj;
             return cmp.constant == this.constant &&
                     cmp.polynomialDegree == this.polynomialDegree &&
-                    ((cmp.id == null && this.id == null) || cmp.id.equals(this.id));
+                    cmp.id == this.id;
         }
         return false;
     }
