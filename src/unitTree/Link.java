@@ -19,6 +19,7 @@ public class Link {
     }
 
     public Link() {
+        operablePair = new OperablePair();
     }
 
     public OperablePair parsePair(StringBuilder equation) {

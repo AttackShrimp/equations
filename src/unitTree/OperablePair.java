@@ -17,6 +17,10 @@ public class OperablePair {
         pair.add(secondOfPair);
     }
 
+    public OperablePair() {
+        pair = new ArrayList<>(2);
+    }
+
     public List<Operable> getPair() {
         return pair;
     }
