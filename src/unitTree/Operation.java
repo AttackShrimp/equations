@@ -57,4 +57,8 @@ public enum Operation {
     public boolean operationOf(char c) {
         return this.symbol == c;
     }
+
+    public char getSymbol() {
+        return symbol;
+    }
 }
