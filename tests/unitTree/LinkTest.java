@@ -63,6 +63,28 @@ class LinkTest {
     }
 
     @Test
-    void parseNext() {
+    void parseNext_parses_double() {
+        Unit dummy = new Unit(0);
+        Arrays.stream(doubles).forEach(d -> Arrays.stream(Operation.values()).forEach(op -> {
+            Link link = new Link();
+            OperablePair expectedResult = new OperablePair(dummy, new Unit(d));
+            String equation = "" + op.getSymbol() + d;
+            assertEquals(link.parseNext(new StringBuilder(equation)), expectedResult, equation + " must be parsed to (operation)(" + d + ")");
+            assertEquals(link.getOperation(), op, equation + " has a " + op + " operation");
+        }));
+    }
+
+    @Test
+    void parseNext_parses_unknowns() {
+        Unit dummy = new Unit(0);
+        Arrays.stream(Operation.values()).forEach(op -> {
+            for (char c : chars) {
+                Link link = new Link();
+                OperablePair expectedResult = new OperablePair(dummy, new Unit(c));
+                String equation = "" + op.getSymbol() + c;
+                assertEquals(link.parseNext(new StringBuilder(equation)), expectedResult, equation + " must be parsed to (operation)(" + c + ")");
+                assertEquals(link.getOperation(), op, equation + " has a " + op + " operation");
+            }
+        });
     }
 }
