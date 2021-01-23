@@ -1,5 +1,6 @@
 package unitTree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Group extends Operable {
@@ -8,6 +9,8 @@ public class Group extends Operable {
     Polynomial polynomial;
 
     public Group(String equation) {
+        operables = new ArrayList<>();
+        links = new ArrayList<>();
         parseEquation(equation);
     }
 
@@ -38,5 +41,9 @@ public class Group extends Operable {
             return cmp.links == this.links;
         }
         return false;
+    }
+
+    public List<Link> getLinks() {
+        return links;
     }
 }

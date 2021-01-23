@@ -10,6 +10,11 @@ public class Link {
     OperablePair operablePair;
     Operation operation;
 
+    public Link(Unit fistOfPair, Operation operation, Unit secondOfPair) {
+        operablePair = new OperablePair(fistOfPair, secondOfPair);
+        this.operation = operation;
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -79,5 +84,10 @@ public class Link {
             return cmp.operablePair.equals(this.operablePair) && cmp.operation.equals(this.operation);
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return operablePair.getFirst().toString() + operation.getSymbol() + operablePair.getSecond().toString();
     }
 }

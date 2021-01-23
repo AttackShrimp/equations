@@ -32,4 +32,9 @@ public class Unit extends Operable {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return constant + (id == 0 ? "" : id + "^" + polynomialDegree);
+    }
 }

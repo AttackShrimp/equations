@@ -50,4 +50,8 @@ public class OperablePair {
         }
         return false;
     }
+
+    public Operable getFirst() {
+        return pair.get(0);
+    }
 }
