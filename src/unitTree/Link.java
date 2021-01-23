@@ -18,7 +18,8 @@ public class Link {
     }
 
     public OperablePair parsePair(StringBuilder equation) {
-        return null;
+        operablePair = new OperablePair(nextOperable(equation));
+        return parseNext(equation);
     }
 
     public OperablePair parseNext(StringBuilder equation) {
