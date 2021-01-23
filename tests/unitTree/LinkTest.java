@@ -15,9 +15,8 @@ class LinkTest {
             Link link = new Link();
             OperablePair expectedResult = new OperablePair(new Unit(d1), new Unit(d2));
             String equation = "" + d1 + op.getSymbol() + d2;
-            System.out.println(equation);
             assertEquals(link.parsePair(new StringBuilder(equation)), expectedResult, equation + " must be parsed to (" + d1 + ")(operation)(" + d2 + ")");
-            assertEquals(link.getOperation(), Operation.PLUS, equation + " has a " + op + " operation");
+            assertEquals(link.getOperation(), op, equation + " has a " + op + " operation");
         })));
     }
 
