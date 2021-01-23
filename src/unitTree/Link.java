@@ -23,15 +23,22 @@ public class Link {
     }
 
     public OperablePair parsePair(StringBuilder equation) {
+        if (groupEnd(equation)) return null;
         operablePair = new OperablePair(nextOperable(equation));
         return parseNext(equation);
     }
 
     public OperablePair parseNext(StringBuilder equation) {
+        if (groupEnd(equation)) return null;
         operation = Operation.parse(equation.charAt(0));
         equation.delete(0, 1);
+        if (groupEnd(equation)) return null;
         operablePair.setSecond(nextOperable(equation));
         return operablePair;
+    }
+
+    private boolean groupEnd(StringBuilder equation) {
+        return equation.length() == 0 || equation.charAt(0) == ')';
     }
 
     private Operable nextOperable(StringBuilder equation) {
