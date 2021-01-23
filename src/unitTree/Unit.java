@@ -21,7 +21,7 @@ public class Unit extends Operable {
             Unit cmp = (Unit) obj;
             return cmp.constant == this.constant &&
                     cmp.polynomialDegree == this.polynomialDegree &&
-                    cmp.id.equals(this.id);
+                    ((cmp.id == null && this.id == null) || cmp.id.equals(this.id));
         }
         return false;
     }
