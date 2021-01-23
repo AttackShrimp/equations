@@ -30,4 +30,13 @@ public class Group extends Operable {
             polynomial.add(group.polynomial);
         });
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Group) {
+            Group cmp = (Group) obj;
+            return cmp.links == this.links;
+        }
+        return false;
+    }
 }

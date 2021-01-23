@@ -8,12 +8,11 @@ import static java.lang.Double.NaN;
 public class Link {
     private static final int DOUBLE = 0, GROUP = 1, UNKNOWN = 3;
     OperablePair operablePair;
+    Operation operation;
 
     public Operation getOperation() {
         return operation;
     }
-
-    Operation operation;
 
     public Link(Operable fistOfPair) {
         operablePair = new OperablePair(fistOfPair);
@@ -53,16 +52,24 @@ public class Link {
         return id;
     }
 
-
     private double matchDouble(StringBuilder equation) {
         Pattern pattern = Pattern.compile("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?");
         Matcher matcher = pattern.matcher(equation);
         if (matcher.find()) {
-            double parsedDouble = Double.parseDouble(equation.substring(0, matcher.start()));
-            equation.delete(0, matcher.start());
+            double parsedDouble = Double.parseDouble(equation.substring(matcher.start(), matcher.end()));
+            equation.delete(matcher.start(), matcher.end());
             return parsedDouble;
         } else {
             return NaN;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Link) {
+            Link cmp = (Link) obj;
+            return cmp.operablePair.equals(this.operablePair) && cmp.operation.equals(this.operation);
+        }
+        return false;
     }
 }

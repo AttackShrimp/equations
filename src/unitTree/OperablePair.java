@@ -11,6 +11,12 @@ public class OperablePair {
         pair.add(fistOfPair);
     }
 
+    public OperablePair(Operable fistOfPair, Operable secondOfPair) {
+        pair = new ArrayList<>(2);
+        pair.add(fistOfPair);
+        pair.add(secondOfPair);
+    }
+
     public List<Operable> getPair() {
         return pair;
     }
@@ -25,5 +31,14 @@ public class OperablePair {
         } else {
             pair.set(1, operable);
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof OperablePair) {
+            OperablePair cmp = (OperablePair) obj;
+            return cmp.pair.equals(this.pair);
+        }
+        return false;
     }
 }

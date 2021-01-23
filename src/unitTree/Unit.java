@@ -14,4 +14,15 @@ public class Unit extends Operable {
         this.constant = constant;
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Unit) {
+            Unit cmp = (Unit) obj;
+            return cmp.constant == this.constant &&
+                    cmp.polynomialDegree == this.polynomialDegree &&
+                    cmp.id.equals(this.id);
+        }
+        return false;
+    }
 }
