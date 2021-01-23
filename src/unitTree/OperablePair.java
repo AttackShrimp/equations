@@ -3,6 +3,8 @@ package unitTree;
 import java.util.ArrayList;
 import java.util.List;
 
+import static unitTree.Unit.EMPTY_UNIT;
+
 public class OperablePair {
     List<Operable> pair;
 
@@ -30,7 +32,10 @@ public class OperablePair {
     }
 
     public void setSecond(Operable operable) {
-        if (pair.size() == 1) {
+        if (pair.size() == 0) {
+            pair.add(EMPTY_UNIT);
+            pair.add(operable);
+        } else if (pair.size() == 1) {
             pair.add(operable);
         } else {
             pair.set(1, operable);

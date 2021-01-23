@@ -1,6 +1,8 @@
 package unitTree;
 
 public class Unit extends Operable {
+    public static final Unit EMPTY_UNIT = new Unit(0);
+
     int polynomialDegree;
     double constant;
     char id;
