@@ -18,8 +18,8 @@ public class Group extends Operable {
         while (currPair != null) {
             operables.addAll(currPair.getPair());
             links.add(currLink);
-            currLink = new Link();
-            currPair = currLink.parsePair(stringBuilder);
+            currLink = new Link(currPair.getSecond());
+            currPair = currLink.parseNext(stringBuilder);
         }
     }
 
