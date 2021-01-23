@@ -17,13 +17,20 @@ public class Link {
         if (nextChar == '(') {
             first = new Group(equation.substring(0, equation.indexOf(")")));
         } else if (nextChar >= 'A' && nextChar <= 'z') {
-            Unit firstOperable = new Unit(matchDouble(equation));
+            first = new Unit(getUnknown(equation));
         } else {
             first = new Unit(matchDouble(equation));
         }
 
         return null;
     }
+
+    private char getUnknown(StringBuilder equation) {
+        char id = equation.charAt(0);
+        equation.delete(0, 1);
+        return id;
+    }
+
 
     private double matchDouble(StringBuilder equation) {
         Pattern pattern = Pattern.compile("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?");
