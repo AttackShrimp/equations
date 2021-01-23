@@ -8,6 +8,11 @@ import static java.lang.Double.NaN;
 public class Link {
     private static final int DOUBLE = 0, GROUP = 1, UNKNOWN = 3;
     OperablePair operablePair;
+
+    public Operation getOperation() {
+        return operation;
+    }
+
     Operation operation;
 
     public Link(Operable fistOfPair) {
