@@ -68,6 +68,25 @@ class GroupTest {
         assertEquals(group.getLinks(), links, equation + " should be parsed into equation");
     }
 
+    @Test
+    void parseEquation_nested_groups() {
+        String equation = "" + num;
+
+        Operable p1 = new Unit(var);
+        Operable p2 = new DummyGroup(new ArrayList<>(), new Unit(num));
+        ArrayList<Link> linksInGroup = new ArrayList<>();
+        for (int i = 0; i < repeats; i++) {
+            linksInGroup = new ArrayList<>();
+            linksInGroup.add(new Link(p1, op, p2));
+            equation = p1.toString() + op.getSymbol() + "(" + equation + ")";
+            p2 = new DummyGroup(linksInGroup, null);
+            p1 = (i % 2 == 0) ? new Unit(num) : new Unit(var);
+        }
+
+        Group group = new Group(equation);
+        assertEquals(group.getLinks(), linksInGroup, equation + " should be parsed into equation");
+    }
+
     static class DummyGroup extends Group {
         public DummyGroup(List<Link> links, Unit unit) {
             super("");
