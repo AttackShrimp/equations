@@ -18,11 +18,14 @@ public class Group extends Operable {
         StringBuilder stringBuilder = new StringBuilder(equation);
         Link currLink = new Link();
         OperablePair currPair = currLink.parsePair(stringBuilder);
-        while (currPair != null) {
+        while (currPair != null && currPair.getSecond() != null) {
             operables.addAll(currPair.getPair());
             links.add(currLink);
             currLink = new Link(currPair.getSecond());
             currPair = currLink.parseNext(stringBuilder);
+        }
+        if (currPair != null && currPair.getSecond() == null) {
+            operables.add(currPair.getFirst());
         }
     }
 
@@ -38,12 +41,17 @@ public class Group extends Operable {
     public boolean equals(Object obj) {
         if (obj instanceof Group) {
             Group cmp = (Group) obj;
-            return cmp.links == this.links;
+            return cmp.links.equals(this.links);
         }
         return false;
     }
 
     public List<Link> getLinks() {
         return links;
+    }
+
+    @Override
+    public String toString() {
+        return (links.size() == 0) ? "[" + operables.get(0).toString() + "]" : links.toString();
     }
 }

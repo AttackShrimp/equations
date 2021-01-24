@@ -10,7 +10,7 @@ public class Link {
     OperablePair operablePair;
     Operation operation;
 
-    public Link(Unit fistOfPair, Operation operation, Unit secondOfPair) {
+    public Link(Operable fistOfPair, Operation operation, Operable secondOfPair) {
         operablePair = new OperablePair(fistOfPair, secondOfPair);
         this.operation = operation;
     }
@@ -30,7 +30,7 @@ public class Link {
     public OperablePair parsePair(StringBuilder equation) {
         if (groupEnd(equation)) return null;
         operablePair = new OperablePair(nextOperable(equation));
-        return parseNext(equation);
+        return (parseNext(equation) == null && operablePair.getFirst() == null) ? null : operablePair;
     }
 
     public OperablePair parseNext(StringBuilder equation) {
@@ -51,8 +51,8 @@ public class Link {
         Operable next;
         if (nextChar == '(') {
             int end = equation.indexOf(")");
-            next = new Group(equation.substring(0, end));
-            equation.delete(0, end);
+            next = new Group(equation.substring(1, end));
+            equation.delete(0, end + 1);
         } else if (nextChar >= 'A' && nextChar <= 'z') {
             next = new Unit(getUnknown(equation));
         } else {

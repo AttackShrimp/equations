@@ -28,7 +28,7 @@ public class OperablePair {
     }
 
     public Operable getSecond() {
-        return pair.get(1);
+        return (pair.size() == 1) ? null : pair.get(1);
     }
 
     public void setSecond(Operable operable) {
