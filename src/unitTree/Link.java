@@ -50,7 +50,9 @@ public class Link {
         char nextChar = equation.charAt(0);
         Operable next;
         if (nextChar == '(') {
-            next = new Group(equation.substring(0, equation.indexOf(")")));
+            int end = equation.indexOf(")");
+            next = new Group(equation.substring(0, end));
+            equation.delete(0, end);
         } else if (nextChar >= 'A' && nextChar <= 'z') {
             next = new Unit(getUnknown(equation));
         } else {
