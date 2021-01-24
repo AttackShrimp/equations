@@ -50,7 +50,7 @@ public class Link {
         char nextChar = equation.charAt(0);
         Operable next;
         if (nextChar == '(') {
-            int end = equation.indexOf(")");
+            int end = closingBracket(equation);
             next = new Group(equation.substring(1, end));
             equation.delete(0, end + 1);
         } else if (nextChar >= 'A' && nextChar <= 'z') {
@@ -59,6 +59,26 @@ public class Link {
             next = new Unit(matchDouble(equation));
         }
         return next;
+    }
+
+    private int closingBracket(StringBuilder equation) {
+        int bracketsEntered = 1;
+        char[] eq = equation.toString().toCharArray();
+        int pos = 1;
+        while (pos < eq.length && bracketsEntered > 0) {
+            switch (eq[pos]) {
+                case '(':
+                    bracketsEntered++;
+                    break;
+                case ')':
+                    bracketsEntered--;
+                    break;
+                default:
+                    break;
+            }
+            pos++;
+        }
+        return pos == eq.length && eq[pos - 1] != ')' ? -1 : pos - 1;
     }
 
     private char getUnknown(StringBuilder equation) {
