@@ -16,18 +16,24 @@ class GroupTest {
     private static final int repeats = 5;
 
     @Test
-    void parseEquation_sequence_of_numbers() {
+    void parseEquation_single_group() {
         StringBuilder equation = new StringBuilder();
-        StringBuilder linkString = new StringBuilder();
+        StringBuilder linkString = new StringBuilder("[");
         List<Link> links = new ArrayList<>();
-        equation.append(num);
-        for (int i = 0; i < repeats; i++) {
-            links.add(new Link(new Unit(num), op, new Unit(num)));
+        equation.append(var);
+        for (int i = 0; i < repeats; i += 2) {
+            links.add(new Link(new Unit(var), op, new Unit(num)));
+            links.add(new Link(new Unit(num), op, new Unit(var)));
             equation.append(op.getSymbol()).append(num);
-            linkString.append("Link(" + num + op.getSymbol() + num + ")");
+            equation.append(op.getSymbol()).append(var);
+            linkString.append(var).append(op.getSymbol()).append(num).append(", ")
+                    .append(num).append(op.getSymbol()).append(var).append(", ");
         }
+        linkString.delete(linkString.length() - 2, linkString.length());
+        linkString.append("]");
         Group group = new Group(equation.toString());
         String msg = equation + " should give:\n\t" + linkString + "\nGives:\n\t" + group.getLinks().toString();
+        System.out.println(msg);
         assertEquals(group.getLinks(), links, msg);
     }
 }
