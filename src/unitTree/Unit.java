@@ -35,6 +35,11 @@ public class Unit extends Operable {
 
     @Override
     public String toString() {
-        return constant + (id == 0 ? "" : id + "^" + polynomialDegree);
+        String res = "";
+        res += (constant == 1) ? "" : constant;
+        res += (constant == 0 || polynomialDegree == 0) ? "" : id;
+        res += (polynomialDegree == 0 && constant == 1) ? 1 : "";
+        res += (constant == 0 || polynomialDegree == 1) ? "" : "^" + polynomialDegree;
+        return res;
     }
 }
