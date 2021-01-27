@@ -4,15 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Polynomial {
-    int maxDegree;
-    List<List<Unit>> units;
+    List<PolynomialLevel> levels;
 
-    public void add(Polynomial polynomial) {
-        for (int i = 0; i < maxDegree; i++) {
-            units.get(i).addAll(polynomial.units.get(i));
-        }
-        for (int i = maxDegree; i < polynomial.maxDegree; i++) {
-            units.add(new ArrayList<>(polynomial.units.get(i)));
-        }
+    public Polynomial(List<Operable> operables, List<Link> links, List<Polynomial> innerPolynomials) {
+        levels = new ArrayList<>();
+
+        innerPolynomials.forEach(p -> {
+            int i = 0;
+            while (i < p.levels.size() && i < levels.size()) {
+                levels.get(i).add(p.levels.get(i));
+                i++;
+            }
+            while (i < p.levels.size()) {
+                levels.add(p.levels.get(i).copy());
+                i++;
+            }
+        });
+
+        operables.stream().filter(op -> op instanceof Unit).forEach(op -> {
+            Unit unit = (Unit) op;
+            
+        });
     }
 }
