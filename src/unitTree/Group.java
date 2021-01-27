@@ -6,7 +6,6 @@ import java.util.List;
 public class Group extends Operable {
     List<Operable> operables;
     List<Link> links;
-    Polynomial polynomial;
 
     public Group(String equation) {
         operables = new ArrayList<>();
@@ -29,12 +28,12 @@ public class Group extends Operable {
         }
     }
 
-    public void generatePolynomial() {
+    public Polynomial generatePolynomial() {
+        List<Polynomial> innerPolynomials = new ArrayList<>();
         operables.stream().filter(op -> op instanceof Group).forEach(g -> {
-            Group group = (Group) g;
-            group.generatePolynomial();
-            polynomial.add(group.polynomial);
+            innerPolynomials.add(((Group) g).generatePolynomial());
         });
+        return new Polynomial(operables, links, innerPolynomials);
     }
 
     @Override
