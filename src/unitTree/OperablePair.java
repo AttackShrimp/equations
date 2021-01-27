@@ -2,6 +2,7 @@ package unitTree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static unitTree.Unit.EMPTY_UNIT;
 
@@ -53,5 +54,11 @@ public class OperablePair {
 
     public Operable getFirst() {
         return pair.get(0);
+    }
+
+    public void replaceWith(Map<Integer, Polynomial> polynomialMap) {
+        for (int i = 0; i < 2; i++) {
+            if (pair.get(i) instanceof Group) polynomialMap.get(pair.get(i).hashCode());
+        }
     }
 }

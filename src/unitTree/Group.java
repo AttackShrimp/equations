@@ -1,7 +1,9 @@
 package unitTree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Group extends Operable {
     List<Operable> operables;
@@ -29,11 +31,14 @@ public class Group extends Operable {
     }
 
     public Polynomial generatePolynomial() {
-        List<Polynomial> innerPolynomials = new ArrayList<>();
-        operables.stream().filter(op -> op instanceof Group).forEach(g -> {
-            innerPolynomials.add(((Group) g).generatePolynomial());
-        });
-        return new Polynomial(operables, links, innerPolynomials);
+        Map<Integer, Polynomial> polynomialMap = new HashMap<>();
+        operables.stream()
+                .filter(op -> op instanceof Group)
+                .map(Group.class::cast)
+                .forEach(g -> polynomialMap.put(g.hashCode(), g.generatePolynomial()));
+        links.forEach(link -> link.replaceOperableIfIn(polynomialMap));
+
+        return new Polynomial(links);
     }
 
     @Override

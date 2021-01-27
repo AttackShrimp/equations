@@ -1,5 +1,6 @@
 package unitTree;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -111,5 +112,9 @@ public class Link {
     @Override
     public String toString() {
         return operablePair.getFirst().toString() + operation.getSymbol() + operablePair.getSecond().toString();
+    }
+
+    public void replaceOperableIfIn(Map<Integer, Polynomial> polynomialMap) {
+        operablePair.replaceWith(polynomialMap);
     }
 }
